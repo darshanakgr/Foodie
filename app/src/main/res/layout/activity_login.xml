@@ -24,8 +24,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="Email address"/>
+        android:hint="Email address"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editText3"
