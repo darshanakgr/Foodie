@@ -1,4 +1,4 @@
-package edu.cse.foodie;
+package edu.cse.foodie.utils;
 
 public class Utils {
 

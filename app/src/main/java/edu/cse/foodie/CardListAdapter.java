@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import edu.cse.foodie.model.Restaurant;
+
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.MyViewHolder> {
 
     private Context mContext;

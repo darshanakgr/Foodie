@@ -1,8 +1,10 @@
-package edu.cse.foodie;
+package edu.cse.foodie.sensor;
 
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+
+import edu.cse.foodie.model.SensorDataObject;
 
 public class LocationHandler implements LocationListener {
     private final SensorDataObject dataObject;

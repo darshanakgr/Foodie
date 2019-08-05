@@ -30,6 +30,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import edu.cse.foodie.model.Restaurant;
+import edu.cse.foodie.service.SensorService;
+import edu.cse.foodie.utils.RequestHandler;
+import edu.cse.foodie.utils.SearchViewOnQueryListener;
+import edu.cse.foodie.utils.Utils;
+
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "MainActivity";
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initService() {
         JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        JobInfo.Builder builder = new JobInfo.Builder(100, new ComponentName(MainActivity.this, MyJobService.class));
+        JobInfo.Builder builder = new JobInfo.Builder(100, new ComponentName(MainActivity.this, SensorService.class));
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
         builder.setMinimumLatency(10000);
         JobInfo jobInfo = builder.build();

@@ -1,4 +1,4 @@
-package edu.cse.foodie;
+package edu.cse.foodie.service;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -28,9 +28,17 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class MyJobService extends JobService {
+import edu.cse.foodie.R;
+import edu.cse.foodie.utils.RequestHandler;
+import edu.cse.foodie.model.SensorDataObject;
+import edu.cse.foodie.sensor.SoundMeter;
+import edu.cse.foodie.sensor.AmbientSensorHandler;
+import edu.cse.foodie.sensor.LocationHandler;
+import edu.cse.foodie.sensor.ProximitySensorHandler;
+
+public class SensorService extends JobService {
     private static final String CHANNEL_ID = "visited_locations";
-    private String TAG = "MyJobService";
+    private String TAG = "SensorService";
     private static boolean rescheduled;
     private static BroadcastReceiver receiver;
     private static NotificationManagerCompat managerCompat;
@@ -54,7 +62,7 @@ public class MyJobService extends JobService {
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     try {
-                                        Toast.makeText(MyJobService.this, "Confirmed that you visited " + response.getJSONObject("res").getString("name"), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SensorService.this, "Confirmed that you visited " + response.getJSONObject("res").getString("name"), Toast.LENGTH_SHORT).show();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -62,7 +70,7 @@ public class MyJobService extends JobService {
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(MyJobService.this, "Could not connect to the server", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SensorService.this, "Could not connect to the server", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         } catch (JSONException e) {
@@ -109,9 +117,9 @@ public class MyJobService extends JobService {
                                         Intent nextIntent = new Intent(KEY_NEXT);
                                         nextIntent.putExtra("_id", response.getString("_id"));
                                         nextIntent.putExtra("id", response.getString("id"));
-                                        PendingIntent nextPendingIntent = PendingIntent.getBroadcast(MyJobService.this, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                        PendingIntent nextPendingIntent = PendingIntent.getBroadcast(SensorService.this, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                                        NotificationCompat.Builder builder = new NotificationCompat.Builder(MyJobService.this, CHANNEL_ID)
+                                        NotificationCompat.Builder builder = new NotificationCompat.Builder(SensorService.this, CHANNEL_ID)
                                                 .setContentTitle("Foodie")
                                                 .setContentText(String.format("Did you visited %s recently?", response.getString("name")))
                                                 .setSmallIcon(R.drawable.notification_icon)
@@ -124,7 +132,7 @@ public class MyJobService extends JobService {
                                         filter.addAction(KEY_NEXT);
                                         registerReceiver(receiver, filter);
                                     } else {
-                                        Toast.makeText(MyJobService.this, response.getString("message"), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SensorService.this, response.getString("message"), Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -154,7 +162,7 @@ public class MyJobService extends JobService {
     private void reschedule() {
         if (!rescheduled) {
             JobScheduler schedular = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-            JobInfo.Builder builder = new JobInfo.Builder(100, new ComponentName(getPackageName(), MyJobService.class.getName()));
+            JobInfo.Builder builder = new JobInfo.Builder(100, new ComponentName(getPackageName(), SensorService.class.getName()));
             builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
             builder.setMinimumLatency(30000);
             JobInfo jobInfo = builder.build();

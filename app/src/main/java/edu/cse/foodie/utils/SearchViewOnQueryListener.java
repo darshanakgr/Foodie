@@ -1,7 +1,5 @@
-package edu.cse.foodie;
+package edu.cse.foodie.utils;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 
@@ -13,6 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import edu.cse.foodie.CardListAdapter;
+import edu.cse.foodie.model.Restaurant;
 
 public class SearchViewOnQueryListener implements SearchView.OnQueryTextListener {
     private static final String TAG = "OnQueryListener";

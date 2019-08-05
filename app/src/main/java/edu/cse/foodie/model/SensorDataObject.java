@@ -1,4 +1,4 @@
-package edu.cse.foodie;
+package edu.cse.foodie.model;
 
 public class SensorDataObject {
     private String authId;

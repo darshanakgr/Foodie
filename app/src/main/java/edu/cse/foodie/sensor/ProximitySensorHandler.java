@@ -1,23 +1,22 @@
-package edu.cse.foodie;
+package edu.cse.foodie.sensor;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-public class AmbientSensorHandler implements SensorEventListener {
-    private final float MAX_VALUE;
+import edu.cse.foodie.model.SensorDataObject;
+
+public class ProximitySensorHandler implements SensorEventListener {
     private final SensorDataObject dataObject;
 
-    public AmbientSensorHandler(SensorDataObject dataObject, Sensor sensor) {
+    public ProximitySensorHandler(SensorDataObject dataObject) {
         this.dataObject = dataObject;
-        this.MAX_VALUE = sensor.getMaximumRange();
     }
 
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float reading = event.values[0];
-        dataObject.setLux(reading / MAX_VALUE);
+        dataObject.setProximity(event.values[0] == 0);
     }
 
     @Override

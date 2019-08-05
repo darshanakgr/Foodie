@@ -1,15 +1,12 @@
 package edu.cse.foodie;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +15,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
+import edu.cse.foodie.model.Restaurant;
+import edu.cse.foodie.utils.RequestHandler;
 
 public class RestaurantProfile extends AppCompatActivity {
 
