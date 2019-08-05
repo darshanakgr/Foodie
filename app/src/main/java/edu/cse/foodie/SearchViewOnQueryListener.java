@@ -35,7 +35,7 @@ public class SearchViewOnQueryListener implements SearchView.OnQueryTextListener
                     for (int i = 0; i < resList.length(); i++) {
                         JSONObject restaurantJSON = resList.getJSONObject(i);
                         Restaurant restaurant = new Restaurant();
-                        restaurant.setId(restaurantJSON.getString("id"));
+                        restaurant.setId(restaurantJSON.getString("_id"));
                         restaurant.setName(restaurantJSON.getString("name"));
                         restaurant.setAddress(restaurantJSON.getString("address"));
                         restaurant.setUrl(restaurantJSON.getString("image"));

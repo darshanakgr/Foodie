@@ -70,20 +70,20 @@
                 android:id="@+id/profileNoiseLevel"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
-                android:text="50db"
+                android:text="51db"
                 android:textAlignment="center"
                 android:textSize="30dp" />
 
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/noiseLevelProgressBar"
-            style="?android:progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:progressDrawable="@drawable/circular_progress"
-            android:max="100"
-            android:progress="100"/>
+        <!--<ProgressBar-->
+            <!--android:id="@+id/noiseLevelProgressBar"-->
+            <!--style="?android:progressBarStyleHorizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:progressDrawable="@drawable/circular_progress"-->
+            <!--android:max="150"-->
+            <!--android:progress="10"/>-->
 
     </LinearLayout>
 
@@ -116,14 +116,14 @@
         </LinearLayout>
 
 
-        <ProgressBar
-            android:id="@+id/lightLevelProgressBar"
-            style="?android:progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:progressDrawable="@drawable/circular_progress"
-            android:max="100"
-            android:progress="100" />
+        <!--<ProgressBar-->
+            <!--android:id="@+id/lightLevelProgressBar"-->
+            <!--style="?android:progressBarStyleHorizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:progressDrawable="@drawable/circular_progress"-->
+            <!--android:max="100"-->
+            <!--android:progress="100" />-->
 
     </LinearLayout>
 

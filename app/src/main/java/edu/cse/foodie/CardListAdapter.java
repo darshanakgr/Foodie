@@ -50,6 +50,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.MyView
                 v.getContext().startActivity(intent);
             }
         });
+
     }
 
     @Override

@@ -27,26 +27,24 @@ public class RequestHandler {
         requestQueue = Volley.newRequestQueue(mContext);
     }
 
-    public void sendUpdate(SensorDataObject dataObject) throws JSONException {
-        String url = Utils.getUrl("sensor/update");
+    public void sendUpdate(SensorDataObject dataObject, Response.Listener<JSONObject> onResponce, Response.ErrorListener onError) throws JSONException {
+        String url = Utils.getUrl("user/inside-restaurant");
         JSONObject jsonBody = new JSONObject();
-        jsonBody.put("id", "T" + System.currentTimeMillis());
-        jsonBody.put("latitude", dataObject.getLat());
-        jsonBody.put("longitude", dataObject.getLng());
+        String id = "T" + System.currentTimeMillis();
+        jsonBody.put("id", id);
+//        Actual Location
+//        jsonBody.put("latitude", dataObject.getLat());
+//        jsonBody.put("longitude", dataObject.getLng());
+//         Near to the goda canteen
+//        jsonBody.put("latitude", 6.7963281);
+//        jsonBody.put("longitude", 79.900239);
+//        Inside the goda canteen
+        jsonBody.put("latitude", 6.7962781);
+        jsonBody.put("longitude", 79.9001792);
         jsonBody.put("light", dataObject.getLux());
-        jsonBody.put("noise", dataObject.getNoiceLevel());
+        jsonBody.put("sound", dataObject.getNoiceLevel());
         jsonBody.put("proximity", dataObject.isProximity());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.i(TAG, "Success");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, error.toString());
-            }
-        });
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody, onResponce, onError);
         requestQueue.add(request);
     }
 
@@ -65,4 +63,21 @@ public class RequestHandler {
         requestQueue.add(request);
     }
 
+
+    public void getNoiseLevel(String id, Response.Listener<JSONObject> onResponse, Response.ErrorListener onErrorResponse) throws JSONException {
+        String url = Utils.getUrl("restaurant/get-intensities");
+        JSONObject jsonBody = new JSONObject();
+        jsonBody.put("_id", id);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody, onResponse, onErrorResponse);
+        requestQueue.add(request);
+    }
+
+    public void notifyVisited(String _id, String id, Response.Listener<JSONObject> onResponse, Response.ErrorListener onErrorResponse) throws JSONException {
+        String url = Utils.getUrl("restaurant/update-intensities");
+        JSONObject jsonBody = new JSONObject();
+        jsonBody.put("_id", _id);
+        jsonBody.put("id", id);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody, onResponse, onErrorResponse);
+        requestQueue.add(request);
+    }
 }
